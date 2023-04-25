@@ -5,15 +5,155 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:layout_marginHorizontal="25dp"
+    android:layout_marginVertical="30dp"
     tools:context=".Test">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:text="Tampilan Text"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Assessment"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_500"/>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textStyle="bold"
+            android:textColor="@color/Blue"
+            android:textSize="17dp"/>
+    </LinearLayout>
+
+<!--  question  -->
+    <TextView
+        android:id="@+id/tvQuestion"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="Membantu orang tua dengan kegiatan sehari-hari mereka."
+        android:textSize="17dp"
         android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="30dp"/>
+
+<!--  Answer  -->
+    <RadioGroup
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb_sangatSuka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sangat Suka"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_200"/>
+        <RadioButton
+            android:id="@+id/rb_suka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Suka"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_200"/>
+        <RadioButton
+            android:id="@+id/rb_netral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Netral"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_200"/>
+        <RadioButton
+            android:id="@+id/rb_tidakSuka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tidak Suka"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_200"/>
+        <RadioButton
+            android:id="@+id/rb_sangatTidakSuka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sangat Tidak Suka"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_200"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="24dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/30"
+                android:textColor="@color/black_200"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            app:icon="@drawable/back"
+            app:iconGravity="textStart"
+            app:iconSize="25dp"
+            android:textAllCaps="false"
+            android:textSize="13dp"
+            app:cornerRadius="50dp"
+            android:layout_marginRight="20dp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            app:icon="@drawable/next"
+            app:iconGravity="textStart"
+            app:iconSize="25dp"
+            android:textAllCaps="false"
+            android:textSize="13dp"
+            app:cornerRadius="50dp"/>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_marginTop="35dp"
+        android:layout_height="60dp"
+        android:text="Finish"
+        android:textAllCaps="false"
+        android:textSize="16dp"
+        app:cornerRadius="50dp"/>
 
 </LinearLayout>
