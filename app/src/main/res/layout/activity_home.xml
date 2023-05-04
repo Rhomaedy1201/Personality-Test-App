@@ -9,15 +9,15 @@
         <!--  Header  -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="165dp"
-            android:background="@drawable/background"
+            android:layout_height="175dp"
+            android:background="@mipmap/bg_header_home"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="40dp">
+                android:layout_marginTop="45dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -28,25 +28,36 @@
                         android:layout_height="match_parent"
                         android:text="Hello,"
                         android:textStyle="bold"
-                        android:textColor="@color/black_500"
+                        android:textColor="#E2E2E2"
                         android:textSize="17dp"/>
                     <TextView
                         android:id="@+id/name"
-                        android:layout_width="match_parent"
+                        android:layout_width="220dp"
+                        android:maxLines="2"
                         android:layout_height="match_parent"
                         android:text="Rhomaedi"
                         android:textStyle="bold"
-                        android:textColor="@color/black_700"
-                        android:textSize="24dp"/>
+                        android:textColor="@color/white_800"
+                        android:textSize="20dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-                <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:src="@drawable/profile"/>
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:onClick="display_profile"
+                    android:background="@drawable/bg_icon_login">
+                    <ImageView
+                        android:id="@+id/profile"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/profile"
+                        android:background="@drawable/radius_profile"
+                        android:clipToOutline="true"/>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -55,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
-            android:layout_marginVertical="20dp"
+            android:layout_marginVertical="15dp"
             android:orientation="vertical">
 
         <!--  Time   -->
@@ -145,11 +156,11 @@
             android:id="@+id/test_now"
             android:layout_width="match_parent"
             android:layout_marginTop="27dp"
-            android:layout_height="57dp"
+            android:layout_height="65dp"
             android:text="Mulai Test Sekarang"
             android:textAllCaps="false"
             android:textSize="13dp"
-            app:cornerRadius="12dp"/>
+            app:cornerRadius="20dp"/>
     </LinearLayout>
 
 

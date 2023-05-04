@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_hasil_test"
+    android:background="@mipmap/bg_hasil_test"
     tools:context=".ResultTest">
 
     <LinearLayout
@@ -43,7 +43,165 @@
             android:layout_height="500dp"
             android:elevation="4dp"
             app:titleTextAppearance="@color/Blue"
-            android:background="#E5F3FF"/>
+            android:background="#E5F3FF">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                android:gravity="center_horizontal">
+        <!-- Realistis -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Realistis"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="16dp"/>
+                    <ProgressBar
+                        android:id="@+id/pb_realistis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:progressDrawable="@drawable/custom_progressbar_realistis"/>
+                    <TextView
+                        android:id="@+id/tv_count_realistis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="34"
+                        android:gravity="end"
+                        android:textSize="11dp"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"/>
+        <!-- Penyelidikan -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penyelidikan"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:layout_marginTop="10dp"/>
+                <ProgressBar
+                    android:id="@+id/pb_penyelidikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:progressDrawable="@drawable/custom_progressbar_penyelidikan"/>
+                <TextView
+                    android:id="@+id/tv_count_penyelidikan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="34"
+                    android:gravity="end"
+                    android:textSize="11dp"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"/>
+                <!-- Artistik -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Artistik"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:layout_marginTop="10dp"/>
+                <ProgressBar
+                    android:id="@+id/pb_artistik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:progressDrawable="@drawable/custom_progressbar_artistik"/>
+                <TextView
+                    android:id="@+id/tv_count_artistik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="34"
+                    android:gravity="end"
+                    android:textSize="11dp"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"/>
+                <!-- Sosial -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sosial"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:layout_marginTop="10dp"/>
+                    <ProgressBar
+                        android:id="@+id/pb_sosial"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:progressDrawable="@drawable/custom_progressbar_sosial"/>
+                    <TextView
+                        android:id="@+id/tv_count_sosial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="34"
+                        android:gravity="end"
+                        android:textSize="11dp"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"/>
+        <!-- Giat -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giat"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:layout_marginTop="10dp"/>
+                <ProgressBar
+                    android:id="@+id/pb_giat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:progressDrawable="@drawable/custom_progressbar_giat"/>
+                <TextView
+                    android:id="@+id/tv_count_giat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="34"
+                    android:gravity="end"
+                    android:textSize="11dp"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"/>
+                <!-- Konvensional -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Konvensional"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:layout_marginTop="10dp"/>
+                <ProgressBar
+                    android:id="@+id/pb_konvensional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:progressDrawable="@drawable/custom_progressbar_konvensional"/>
+                <TextView
+                    android:id="@+id/tv_count_konvensional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="34"
+                    android:gravity="end"
+                    android:textSize="11dp"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_backHome"

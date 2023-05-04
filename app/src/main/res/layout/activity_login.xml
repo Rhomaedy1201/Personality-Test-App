@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/Blue"
+    android:background="@drawable/background_linear_login"
     android:paddingHorizontal="30dp"
     android:paddingVertical="35dp"
     tools:context=".Login">
@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/logo_polije"/>
+            android:src="@mipmap/logo_polije"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,19 +28,26 @@
             android:textStyle="bold|normal"
             android:textSize="13dp"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="25dp"
+    <RelativeLayout
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:background="@drawable/bg_icon_login">
         <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            app:lottie_rawRes="@raw/login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_rawRes="@raw/icon_login"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="10dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"/>
-    </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,6 +75,6 @@
         android:textColor="@color/black"
         android:textAllCaps="false"
         android:textStyle="normal"
-        app:cornerRadius="15dp"/>
+        app:cornerRadius="20dp"/>
 
 </LinearLayout>
