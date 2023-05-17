@@ -1,12 +1,19 @@
 package com.example.personalitytestapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.gms.common.util.ArrayUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ResultTest extends AppCompatActivity {
 
@@ -30,6 +37,7 @@ public class ResultTest extends AppCompatActivity {
     private ProgressBar progressBar_giat;
     private ProgressBar progressBar_konvensional;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,38 +45,22 @@ public class ResultTest extends AppCompatActivity {
 
         count1 = findViewById(R.id.tv_count_realistis);
         count2 = findViewById(R.id.tv_count_penyelidikan);
-        count3 = findViewById(R.id.tv_count_artistik);
-        count4 = findViewById(R.id.tv_count_sosial);
-        count5 = findViewById(R.id.tv_count_giat);
-        count6 = findViewById(R.id.tv_count_konvensional);
 
         progressBar_realistis = findViewById(R.id.pb_realistis);
         progressBar_penyelidikan = findViewById(R.id.pb_penyelidikan);
-        progressBar_artistik = findViewById(R.id.pb_artistik);
-        progressBar_sosial = findViewById(R.id.pb_sosial);
-        progressBar_giat = findViewById(R.id.pb_giat);
-        progressBar_konvensional = findViewById(R.id.pb_konvensional);
 
-        progressBar_realistis.setProgress(Test.hasil_sangatSuka);
-        progressBar_penyelidikan.setProgress(Test.hasil_suka);
-        progressBar_artistik.setProgress(Test.hasil_netral);
-        progressBar_sosial.setProgress(Test.hasil_tidakSuka);
-        progressBar_giat.setProgress(Test.hasil_sangatTidakSuka);
-        progressBar_konvensional.setProgress(currentProgress6);
+        progressBar_realistis.setProgress(Test.pilihan_iya);
+        progressBar_penyelidikan.setProgress(Test.pilihan_tidak);
 
         progressBar_realistis.setMax(10);
         progressBar_penyelidikan.setMax(10);
-        progressBar_artistik.setMax(10);
-        progressBar_sosial.setMax(10);
-        progressBar_giat.setMax(10);
-        progressBar_konvensional.setMax(10);
 
-        count1.setText("" + Test.hasil_sangatSuka);
-        count2.setText("" + Test.hasil_suka);
-        count3.setText("" + Test.hasil_netral);
-        count4.setText("" + Test.hasil_tidakSuka);
-        count5.setText("" + Test.hasil_sangatTidakSuka);
-        count6.setText("" + currentProgress6);
+//        int[] a = {Test.pilihan_iya, Test.pilihan_tidak};
+//        int max = Arrays.stream(a).max().getAsInt();
+
+        count1.setText("" + Test.pilihan_iya);
+        count2.setText("" + Test.pilihan_tidak);
+//        count6.setText("" + max);
 
         backHome = findViewById(R.id.btn_backHome);
         backHome.setOnClickListener(v -> {

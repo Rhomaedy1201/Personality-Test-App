@@ -49,6 +49,7 @@
                     android:layout_height="60dp"
                     android:gravity="center"
                     android:onClick="display_profile"
+                    
                     android:background="@drawable/bg_icon_login">
                     <ImageView
                         android:id="@+id/profile"

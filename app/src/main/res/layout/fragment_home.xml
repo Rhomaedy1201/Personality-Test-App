@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeFragment">
+
+    <!--  Header  -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@mipmap/bg_header_home"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="50dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/hello"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Hello,"
+                    android:textStyle="bold"
+                    android:textColor="#E2E2E2"
+                    android:textSize="17dp"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="220dp"
+                    android:maxLines="2"
+                    android:layout_height="match_parent"
+                    android:text="Rhomaedi"
+                    android:textStyle="bold"
+                    android:textColor="@color/white_800"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/toProfile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:onClick="display_profile"
+                android:background="@drawable/bg_icon_login">
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/profile"
+                    android:background="@drawable/radius_profile"
+                    android:clipToOutline="true"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="15dp"
+        android:layout_below="@+id/header"
+        android:orientation="vertical">
+        <!--  Time   -->
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EAFCDF"
+            android:padding="27dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/time"
+                    android:layout_marginLeft="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Kerjakan dengan \nwaktu kurang dari 12 menit"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_200"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+        <!--  Answer  -->
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:background="#FEF5E7"
+            android:padding="27dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/answer"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Jawab dengan jujur, \nbahkan jika Anda tidak \nmenyukai jawabannya."
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_200"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <!--  Netrall  -->
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:background="#DDF7FF"
+            android:padding="27dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/netral"
+                    android:layout_marginLeft="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Cobalah untuk tidak \nmemilih jawaban netral."
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_200"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/test_now"
+            android:layout_width="match_parent"
+            android:layout_marginTop="27dp"
+            android:layout_height="65dp"
+            android:text="Mulai Test Sekarang"
+            android:textAllCaps="false"
+            android:textSize="13dp"
+            app:cornerRadius="20dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

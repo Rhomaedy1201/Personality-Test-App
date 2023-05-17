@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ResultTestFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="25dp"
+        android:layout_marginHorizontal="35dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipe Kepribadian anda adalah : "
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_marginTop="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Realistis"
+                android:textSize="20dp"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:titleTextAppearance="@color/Blue"
+            android:background="#E5F3FF">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                android:gravity="center_horizontal">
+                <!-- Introvert -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Introvert"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+                <ProgressBar
+                    android:id="@+id/pb_introvert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:progressDrawable="@drawable/custom_progressbar_realistis"/>
+                <TextView
+                    android:id="@+id/tv_count_introvert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="34"
+                    android:gravity="end"
+                    android:textSize="11dp"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"/>
+                <!-- Extrovert -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Extrovert"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:layout_marginTop="10dp"/>
+                <ProgressBar
+                    android:id="@+id/pb_extrovert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:progressDrawable="@drawable/custom_progressbar_penyelidikan"/>
+                <TextView
+                    android:id="@+id/tv_count_extrovert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="34"
+                    android:gravity="end"
+                    android:textSize="11dp"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Introvert"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textAlignment="center"
+                android:textSize="14dp"
+                android:text="introvert di lingkungan kerja memiliki
+karakteristik, yakni mereka cenderung tidak
+menyukai konflik. Bahkan jika memungkinkan
+mereka memilih untuk menghindari konflik
+di kantor. Kelebihan dari karyawan introvert
+adalah mereka melakukan pekerjaan secara
+fokus. Mereka menghindari multitasking dan
+memilih menyelesaikan satu pekerjaan
+terlebih dahulu. Selain itu, introvert lebih
+menyukai keheningan atau suasana
+kantor yang tidak berisik untuk meningkatkan
+fokusnya dalam bekerja." />
+        </LinearLayout>
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btn_backHome"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_marginTop="35dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:text="Kembali"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="16dp"-->
+<!--            app:cornerRadius="50dp"/>-->
+    </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

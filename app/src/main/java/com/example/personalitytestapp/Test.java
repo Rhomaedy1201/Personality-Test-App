@@ -21,9 +21,11 @@ public class Test extends AppCompatActivity {
     private Button finishTest, btnNext, btnBack;
     TextView question, noSoal, jmlSoal;
     RadioGroup rg;
-    RadioButton sangatSuka, suka, netral, tidakSuka, sangatTidakSuka;
+    RadioButton iya, tidak;
     int no = 0;
-    public static int hasil, hasil_sangatSuka, hasil_suka, hasil_netral, hasil_tidakSuka, hasil_sangatTidakSuka;
+    public static int hasil, pilihan_iya, pilihan_tidak;
+    RadioButton jawaban_user;
+    String ambil_jawaban_user;
 
 //    question title
     String[] question_title = new String[]{
@@ -40,11 +42,8 @@ public class Test extends AppCompatActivity {
     };
 //    answer
     String[] answer = new String[]{
-        "Sangat Suka",
-        "Suka",
-        "Netral",
-        "Tidak Suka",
-        "Sangat Tidak Suka",
+        "Iya",
+        "Tidak",
     };
 
     @SuppressLint("MissingInflatedId")
@@ -61,18 +60,12 @@ public class Test extends AppCompatActivity {
         noSoal.setText("" + (no + 1 ));
         jmlSoal.setText("/" + question_title.length);
 
-        sangatSuka = findViewById(R.id.rb_sangatSuka);
-        suka = findViewById(R.id.rb_suka);
-        netral = findViewById(R.id.rb_netral);
-        tidakSuka = findViewById(R.id.rb_tidakSuka);
-        sangatTidakSuka = findViewById(R.id.rb_sangatTidakSuka);
+        iya = findViewById(R.id.rb_iya);
+        tidak = findViewById(R.id.rb_tidak);
 
         question.setText(question_title[no]);
-        sangatSuka.setText(answer[0]);
-        suka.setText(answer[1]);
-        netral.setText(answer[2]);
-        tidakSuka.setText(answer[3]);
-        sangatTidakSuka.setText(answer[4]);
+        iya.setText(answer[0]);
+        tidak.setText(answer[1]);
 
         rg.check(0);
 
@@ -89,32 +82,70 @@ public class Test extends AppCompatActivity {
         finishTest.setOnClickListener(v -> {
             tabFinish();
         });
+
+        btnBack = findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(v -> {
+            back();
+        });
     }
 
-    private void back() {
+    public void back() {
+        iya = findViewById(R.id.rb_iya);
+        tidak = findViewById(R.id.rb_tidak);
+        no--;
+        System.out.println("" + no);
+        System.out.println("" + ambil_jawaban_user);
+        if (ambil_jawaban_user == "Iya"){
+//            iya.setChecked(true);
+            System.out.println("Iyaaaaaa");
+        }else {
+//            iya.setChecked(false);
+//            tidak.setChecked(true);
+            System.out.println("Tidakkkkk");
+        }
+        rg.check(0);
+        if(no <= question_title.length){
+            // mengecek soal selanjutnya sesuai dengan nomer
+            question.setText(question_title[no]);
+            noSoal.setText(""+ (no + 1));
+
+            // pengecekan tombol kembali/back
+            if (no == 0){
+                btnBack = findViewById(R.id.btn_back);
+                btnBack.setEnabled(false);
+            }else{
+                btnBack = findViewById(R.id.btn_back);
+                btnBack.setEnabled(true);
+            }
+
+            if (no == question_title.length){
+                btnNext = findViewById(R.id.btn_next);
+                btnNext.setEnabled(false);
+            }else{
+                btnNext = findViewById(R.id.btn_next);
+                btnNext.setEnabled(true);
+            }
+        }else{
+            finishTest.setEnabled(true);
+        }
     }
 
     private void tabFinish() {
         Intent intent = new Intent(getApplicationContext(), ResultTest.class);
         startActivity(intent);
+        finish();
     }
 
     public void next(View view){
-        if (sangatSuka.isChecked() || suka.isChecked() || netral.isChecked() || tidakSuka.isChecked() || sangatTidakSuka.isChecked()){
-            RadioButton jawaban_user = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
-            String ambil_jawaban_user = jawaban_user.getText().toString();
+        if (iya.isChecked() || tidak.isChecked()){
+            jawaban_user = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
+            ambil_jawaban_user = jawaban_user.getText().toString();
 
             // mengecek jawaban yang dipilih dan menambah nilai 1 pada salah satu pilihan
             if (ambil_jawaban_user.equalsIgnoreCase(answer[0])){
-                hasil_sangatSuka++;
+                pilihan_iya++;
             }else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])){
-                hasil_suka++;
-            }else if (ambil_jawaban_user.equalsIgnoreCase(answer[2])){
-                hasil_netral++;
-            }else if (ambil_jawaban_user.equalsIgnoreCase(answer[3])){
-                hasil_tidakSuka++;
-            }else if (ambil_jawaban_user.equalsIgnoreCase(answer[4])){
-                hasil_sangatTidakSuka++;
+                pilihan_tidak++;
             }
             rg.check(0);
             no++;
@@ -126,13 +157,10 @@ public class Test extends AppCompatActivity {
             }
 
             // mengecek nilai jawaban dari soal
-            System.out.println("Sangat Suka = " + hasil_sangatSuka);
-            System.out.println("Suka = " + hasil_suka);
-            System.out.println("Netral = " + hasil_netral);
-            System.out.println("tidak Suka = " + hasil_tidakSuka);
-            System.out.println("Sangat tidak suka = " + hasil_sangatTidakSuka);
+            System.out.println("Sangat Suka = " + pilihan_iya);
+            System.out.println("Suka = " + pilihan_tidak);
 
-            System.out.println("pilihan terbanyak adalah = " + Collections.max(Arrays.asList(hasil_sangatSuka, hasil_suka, hasil_netral, hasil_tidakSuka, hasil_sangatTidakSuka)));
+            System.out.println("pilihan terbanyak adalah = " + Collections.max(Arrays.asList(pilihan_iya,pilihan_tidak)));
 
             if(no <= question_title.length){
                 // mengecek soal selanjutnya sesuai dengan nomer
@@ -148,7 +176,7 @@ public class Test extends AppCompatActivity {
                     btnBack.setEnabled(true);
                 }
 
-                if (no == 9){
+                if (no == question_title.length){
                     btnNext = findViewById(R.id.btn_next);
                     btnNext.setEnabled(false);
                 }else{

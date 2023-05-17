@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginHorizontal="25dp"
+    android:layout_marginHorizontal="30dp"
     android:layout_marginVertical="30dp"
     tools:context=".Test">
 
@@ -25,14 +25,14 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/tvTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00"
-            android:textStyle="bold"
-            android:textColor="@color/Blue"
-            android:textSize="17dp"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tvTimer"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="00:00"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/Blue"-->
+<!--            android:textSize="17dp"/>-->
     </LinearLayout>
 
 <!--  question  -->
@@ -50,111 +50,91 @@
         android:id="@+id/rgAnswer"
         android:layout_marginTop="35dp"
         android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layoutDirection="rtl"
         android:layout_height="wrap_content">
         <RadioButton
-            android:id="@+id/rb_sangatSuka"
-            android:layout_width="wrap_content"
+            android:id="@+id/rb_iya"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SangatSuka"
+            android:text="Iya"
             android:textSize="15dp"
+            android:background="@drawable/accept_background_selector"
             android:textStyle="bold"
+            android:button="@drawable/custom_radio_button"
+            android:paddingHorizontal="40dp"
             android:textColor="@color/black_200"/>
         <RadioButton
-            android:id="@+id/rb_suka"
-            android:layout_width="wrap_content"
+            android:id="@+id/rb_tidak"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Suka1"
+            android:text="Tidak"
             android:textSize="15dp"
+            android:background="@drawable/accept_background_selector"
+            android:paddingHorizontal="40dp"
             android:textStyle="bold"
-            android:textColor="@color/black_200"/>
-        <RadioButton
-            android:id="@+id/rb_netral"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Netral"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="@color/black_200"/>
-        <RadioButton
-            android:id="@+id/rb_tidakSuka"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tidak Suka"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="@color/black_200"/>
-        <RadioButton
-            android:id="@+id/rb_sangatTidakSuka"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sangat Tidak Suka"
-            android:textSize="15dp"
-            android:textStyle="bold"
+            android:button="@drawable/custom_radio_button"
+            android:layout_marginTop="20dp"
             android:textColor="@color/black_200"/>
     </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/no_soal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24dp"/>
+        <TextView
+            android:id="@+id/jumlah_soal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/30"
+            android:textColor="@color/black_200"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/no_soal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="01"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="24dp"/>
-            <TextView
-                android:id="@+id/jumlah_soal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="/30"
-                android:textColor="@color/black_200"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
-        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:text="Back"
+            android:onClick="back"
+            android:textAllCaps="false"
+            android:textSize="16dp"
+            app:cornerRadius="50dp"/>
         <LinearLayout
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_back"
-            android:layout_width="45dp"
-            android:layout_height="55dp"
-            android:gravity="center_horizontal"
-            app:icon="@mipmap/back"
-            android:onClick="back"
-            app:iconGravity="textStart"
-            app:iconSize="25dp"
-            android:textAllCaps="false"
-            android:textSize="13dp"
-            app:cornerRadius="50dp"
-            android:layout_marginRight="20dp"/>
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next"
-            android:layout_width="45dp"
+            android:layout_width="160dp"
             android:layout_height="55dp"
-            android:gravity="center_horizontal"
-            app:icon="@mipmap/next"
+            android:text="Next"
             android:onClick="next"
-            app:iconGravity="textStart"
-            app:iconSize="25dp"
             android:textAllCaps="false"
-            android:textSize="13dp"
+            android:textSize="16dp"
             app:cornerRadius="50dp"/>
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_finish"
         android:layout_width="match_parent"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:layout_height="60dp"
         android:text="Finish"
         android:textAllCaps="false"

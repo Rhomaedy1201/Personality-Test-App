@@ -47,12 +47,6 @@ public class Home extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        String idUser = account.getIdToken();
-//        String name = account.getDisplayName();
-//
-//        SharedPreferences.Editor editor = getSharedPreferences("user_data", MODE_PRIVATE).edit();
-//        editor.putString("idUser", account.getIdToken());
-//        editor.putString("name", account.getDisplayName());
 
         Intent intent = getIntent();
 
