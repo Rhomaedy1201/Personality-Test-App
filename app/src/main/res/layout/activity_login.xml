@@ -57,6 +57,7 @@
         android:layout_marginTop="40dp"
         android:textColor="@color/white"/>
     <TextView
+        android:id="@+id/textLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ini adalah aplikasi Tes Kepribadian \ngratis, Silahkan Login dengan \nAkun Google Anda"
@@ -76,5 +77,4 @@
         android:textAllCaps="false"
         android:textStyle="normal"
         app:cornerRadius="20dp"/>
-
 </LinearLayout>

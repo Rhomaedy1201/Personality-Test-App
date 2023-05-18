@@ -33,77 +33,22 @@
                 android:layout_marginTop="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Realistis"
+                android:text="Introvert"
                 android:textSize="20dp"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
         </LinearLayout>
-        <androidx.appcompat.widget.Toolbar
-            android:layout_marginTop="20dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            app:titleTextAppearance="@color/Blue"
-            android:background="#E5F3FF">
-            <LinearLayout
+            android:layout_height="400dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <com.github.mikephil.charting.charts.PieChart
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="20dp"
-                android:gravity="center_horizontal">
-                <!-- Introvert -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Introvert"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16dp"/>
-                <ProgressBar
-                    android:id="@+id/pb_introvert"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:progressDrawable="@drawable/custom_progressbar_realistis"/>
-                <TextView
-                    android:id="@+id/tv_count_introvert"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="34"
-                    android:gravity="end"
-                    android:textSize="11dp"
-                    android:textColor="@color/black"
-                    android:textStyle="italic"/>
-                <!-- Extrovert -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Extrovert"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:layout_marginTop="10dp"/>
-                <ProgressBar
-                    android:id="@+id/pb_extrovert"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:progressDrawable="@drawable/custom_progressbar_penyelidikan"/>
-                <TextView
-                    android:id="@+id/tv_count_extrovert"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="34"
-                    android:gravity="end"
-                    android:textSize="11dp"
-                    android:textColor="@color/black"
-                    android:textStyle="italic"/>
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
+                android:id="@+id/pieChart_view"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -139,16 +84,6 @@ menyukai keheningan atau suasana
 kantor yang tidak berisik untuk meningkatkan
 fokusnya dalam bekerja." />
         </LinearLayout>
-
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/btn_backHome"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_marginTop="35dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:text="Kembali"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:textSize="16dp"-->
-<!--            app:cornerRadius="50dp"/>-->
     </LinearLayout>
     </ScrollView>
 

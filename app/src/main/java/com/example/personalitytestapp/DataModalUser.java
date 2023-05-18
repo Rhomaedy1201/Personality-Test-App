@@ -7,13 +7,13 @@ public class DataModalUser {
     private String role;
     private String google_id;
 
-    public DataModalUser(String name, String email, String password, String role, String google_id) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.google_id = google_id;
-    }
+//    public DataModalUser(String name) {
+//        this.name = name;
+//        this.email = email;
+//        this.password = password;
+//        this.role = role;
+//        this.google_id = google_id;
+//    }
 
 //    For Name
     public String getName() {

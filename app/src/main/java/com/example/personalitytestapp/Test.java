@@ -1,10 +1,14 @@
 package com.example.personalitytestapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -12,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -24,26 +27,16 @@ public class Test extends AppCompatActivity {
     RadioButton iya, tidak;
     int no = 0;
     public static int hasil, pilihan_iya, pilihan_tidak;
+    public static int pilih_introvert, pilih_extrovert;
     RadioButton jawaban_user;
     String ambil_jawaban_user;
 
-//    question title
-    String[] question_title = new String[]{
-            "Uji kualitas suku cadang sebelum pengiriman",
-        "Mempelajari struktur tubuh manusia",
-        "Melakukan paduan suara musik",
-        "Berikan bimbingan karir kepada orang-orang",
-        "Menjual waralaba restoran kepada individu",
-        "Hasilkan cek gaji bulanan untuk kantor",
-        "Letakkan bata atau ubin",
-        "Pelajari perilaku hewan",
-        "Arahkan permainan",
-        "Lakukan pekerjaan sukarela di organisasi nirlaba",
-    };
-//    answer
+    //    question title
+    String[] question_title = QuestionTest.question_test;
+    //    answer
     String[] answer = new String[]{
-        "Iya",
-        "Tidak",
+            "Iya",
+            "Tidak",
     };
 
     @SuppressLint("MissingInflatedId")
@@ -57,30 +50,35 @@ public class Test extends AppCompatActivity {
         noSoal = findViewById(R.id.no_soal);
         jmlSoal = findViewById(R.id.jumlah_soal);
 
-        noSoal.setText("" + (no + 1 ));
+        noSoal.setText("" + (no + 1));
         jmlSoal.setText("/" + question_title.length);
 
         iya = findViewById(R.id.rb_iya);
         tidak = findViewById(R.id.rb_tidak);
 
-        question.setText(question_title[no]);
+        question.setText(question_title[0]);
+
         iya.setText(answer[0]);
         tidak.setText(answer[1]);
 
         rg.check(0);
 
-        if (no == 0){
+        if (no == 0) {
             btnBack = findViewById(R.id.btn_back);
             btnBack.setEnabled(false);
         }
-        if(no < 8){
+        if (no <= question_title.length) {
             finishTest = findViewById(R.id.btn_finish);
             finishTest.setEnabled(false);
         }
 
         finishTest = findViewById(R.id.btn_finish);
-        finishTest.setOnClickListener(v -> {
-            tabFinish();
+        finishTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ResultTest.class);
+                startActivity(intent);
+            }
         });
 
         btnBack = findViewById(R.id.btn_back);
@@ -95,99 +93,111 @@ public class Test extends AppCompatActivity {
         no--;
         System.out.println("" + no);
         System.out.println("" + ambil_jawaban_user);
-        if (ambil_jawaban_user == "Iya"){
+        if (ambil_jawaban_user == "Iya") {
 //            iya.setChecked(true);
             System.out.println("Iyaaaaaa");
-        }else {
+        } else {
 //            iya.setChecked(false);
 //            tidak.setChecked(true);
             System.out.println("Tidakkkkk");
         }
         rg.check(0);
-        if(no <= question_title.length){
+        if (no <= question_title.length) {
             // mengecek soal selanjutnya sesuai dengan nomer
             question.setText(question_title[no]);
-            noSoal.setText(""+ (no + 1));
+            noSoal.setText("" + (no + 1));
+
+            if (no <= 39) {
+                finishTest = findViewById(R.id.btn_finish);
+                finishTest.setEnabled(false);
+            }
 
             // pengecekan tombol kembali/back
-            if (no == 0){
+            if (no == 0) {
                 btnBack = findViewById(R.id.btn_back);
                 btnBack.setEnabled(false);
-            }else{
+            } else {
                 btnBack = findViewById(R.id.btn_back);
                 btnBack.setEnabled(true);
             }
 
-            if (no == question_title.length){
+            if (no == question_title.length) {
                 btnNext = findViewById(R.id.btn_next);
                 btnNext.setEnabled(false);
-            }else{
+            } else {
                 btnNext = findViewById(R.id.btn_next);
                 btnNext.setEnabled(true);
             }
-        }else{
+        } else {
             finishTest.setEnabled(true);
         }
     }
 
-    private void tabFinish() {
-        Intent intent = new Intent(getApplicationContext(), ResultTest.class);
-        startActivity(intent);
-        finish();
-    }
-
-    public void next(View view){
-        if (iya.isChecked() || tidak.isChecked()){
+    public void next(View view) {
+        if (iya.isChecked() || tidak.isChecked()) {
             jawaban_user = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
             ambil_jawaban_user = jawaban_user.getText().toString();
 
             // mengecek jawaban yang dipilih dan menambah nilai 1 pada salah satu pilihan
-            if (ambil_jawaban_user.equalsIgnoreCase(answer[0])){
-                pilihan_iya++;
-            }else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])){
-                pilihan_tidak++;
+            if ((no % 2) == 0) {
+                // Genap & Introvert
+                if (ambil_jawaban_user.equalsIgnoreCase(answer[0])) {
+                    pilih_introvert++;
+                } else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])) {
+                    pilih_extrovert++;
+                }
             }
+            else {
+                // Ganjil % Extrovert
+                if (ambil_jawaban_user.equalsIgnoreCase(answer[0])) {
+                    pilih_extrovert++;
+                } else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])) {
+                    pilih_introvert++;
+                }
+            }
+
             rg.check(0);
             no++;
 
-            // cek button finish jika udah terakhir maka enable
-            if(no >= 9){
-                finishTest = findViewById(R.id.btn_finish);
-                finishTest.setEnabled(true);
-            }
-
             // mengecek nilai jawaban dari soal
-            System.out.println("Sangat Suka = " + pilihan_iya);
-            System.out.println("Suka = " + pilihan_tidak);
+            System.out.println("Introvert = " + pilih_introvert);
+            System.out.println("Extrovert = " + pilih_extrovert);
 
-            System.out.println("pilihan terbanyak adalah = " + Collections.max(Arrays.asList(pilihan_iya,pilihan_tidak)));
+            System.out.println("pilihan terbanyak adalah = " + Collections.max(Arrays.asList(pilih_introvert, pilih_extrovert)));
 
-            if(no <= question_title.length){
+            if (no <= question_title.length) {
                 // mengecek soal selanjutnya sesuai dengan nomer
                 question.setText(question_title[no]);
-                noSoal.setText(""+ (no + 1));
+                noSoal.setText("" + (no + 1));
+
+                // cek button finish jika udah terakhir maka enable
+                if (no >= 39) {
+                    finishTest = findViewById(R.id.btn_finish);
+                    finishTest.setEnabled(true);
+                }
 
                 // pengecekan tombol kembali/back
-                if (no == 0){
+                if (no == 0) {
                     btnBack = findViewById(R.id.btn_back);
                     btnBack.setEnabled(false);
-                }else{
+                } else {
                     btnBack = findViewById(R.id.btn_back);
                     btnBack.setEnabled(true);
                 }
 
-                if (no == question_title.length){
+                if (no >= 39) {
                     btnNext = findViewById(R.id.btn_next);
                     btnNext.setEnabled(false);
-                }else{
+                } else {
                     btnNext = findViewById(R.id.btn_next);
                     btnNext.setEnabled(true);
                 }
-            }else{
+            } else {
                 finishTest.setEnabled(true);
             }
-        }else{
+        } else {
             Toast.makeText(this, "Kamu jawab dulu", Toast.LENGTH_LONG).show();
         }
     }
+
 }

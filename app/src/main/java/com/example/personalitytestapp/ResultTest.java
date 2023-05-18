@@ -4,38 +4,30 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.gms.common.util.ArrayUtils;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ResultTest extends AppCompatActivity {
 
-    private Button backHome;
-    private int currentProgress1 = 40;
-    private int currentProgress2 = 30;
-    private int currentProgress3 = 25;
-    private int currentProgress4 = 12;
-    private int currentProgress5 = 20;
-    private int currentProgress6 = 1;
-    private TextView count1;
-    private TextView count2;
-    private TextView count3;
-    private TextView count4;
-    private TextView count5;
-    private TextView count6;
-    private ProgressBar progressBar_realistis;
-    private ProgressBar progressBar_penyelidikan;
-    private ProgressBar progressBar_artistik;
-    private ProgressBar progressBar_sosial;
-    private ProgressBar progressBar_giat;
-    private ProgressBar progressBar_konvensional;
+    PieChart pieChart;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -43,34 +35,54 @@ public class ResultTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_test);
 
-        count1 = findViewById(R.id.tv_count_realistis);
-        count2 = findViewById(R.id.tv_count_penyelidikan);
-
-        progressBar_realistis = findViewById(R.id.pb_realistis);
-        progressBar_penyelidikan = findViewById(R.id.pb_penyelidikan);
-
-        progressBar_realistis.setProgress(Test.pilihan_iya);
-        progressBar_penyelidikan.setProgress(Test.pilihan_tidak);
-
-        progressBar_realistis.setMax(10);
-        progressBar_penyelidikan.setMax(10);
-
-//        int[] a = {Test.pilihan_iya, Test.pilihan_tidak};
-//        int max = Arrays.stream(a).max().getAsInt();
-
-        count1.setText("" + Test.pilihan_iya);
-        count2.setText("" + Test.pilihan_tidak);
-//        count6.setText("" + max);
-
-        backHome = findViewById(R.id.btn_backHome);
-        backHome.setOnClickListener(v -> {
-            tabBackHome();
-        });
+        pieChart = findViewById(R.id.pieChart_view);
+        showPieChart();
     }
 
     private void tabBackHome() {
         Intent intent = new Intent(getApplicationContext(), Home.class);
         startActivity(intent);
+    }
+
+    private void showPieChart(){
+
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+        String label = "";
+
+        int introvert = (Test.pilih_introvert * 100) / 40;
+        int extrovert = (Test.pilih_extrovert * 100) / 40;
+
+
+
+        //initializing data
+        Map<String, Integer> typeAmountMap = new HashMap<>();
+        typeAmountMap.put("Introvert", introvert);
+        typeAmountMap.put("Extrovert", extrovert);
+
+        //initializing colors for the entries
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.parseColor("#009CD7"));
+        colors.add(Color.parseColor("#FF7F50"));
+
+        //input data and fit data into pie chart entry
+        for(String type: typeAmountMap.keySet()){
+            pieEntries.add(new PieEntry(typeAmountMap.get(type).floatValue(), type));
+        }
+
+        //collecting the entries with label name
+        PieDataSet pieDataSet = new PieDataSet(pieEntries,label);
+        //setting text size of the value
+        pieDataSet.setValueTextSize(15f);
+        //providing color list for coloring different entries
+        pieDataSet.setColors(colors);
+        //grouping the data set from entry to chart
+        PieData pieData = new PieData(pieDataSet);
+        //showing the value of the entries, default true if not set
+        pieData.setValueFormatter(new MyValueFormatter(new DecimalFormat("###,###,###"), pieChart));
+        pieData.setDrawValues(true);
+
+        pieChart.setData(pieData);
+        pieChart.invalidate();
     }
 
 }
