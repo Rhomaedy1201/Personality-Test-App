@@ -41,10 +41,13 @@ public class ResultTestFragment extends Fragment {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
         String label = "";
 
+        int introvert = (Test.pilih_introvert * 100) / 40;
+        int extrovert = (Test.pilih_extrovert * 100) / 40;
+
         //initializing data
         Map<String, Integer> typeAmountMap = new HashMap<>();
-        typeAmountMap.put("Introvert",Test.pilih_introvert);
-        typeAmountMap.put("Extrovert",Test.pilih_extrovert);
+        typeAmountMap.put("Introvert", introvert);
+        typeAmountMap.put("Extrovert", extrovert);
 
         //initializing colors for the entries
         ArrayList<Integer> colors = new ArrayList<>();

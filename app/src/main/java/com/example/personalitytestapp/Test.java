@@ -56,6 +56,7 @@ public class Test extends AppCompatActivity {
         iya = findViewById(R.id.rb_iya);
         tidak = findViewById(R.id.rb_tidak);
 
+
         question.setText(question_title[0]);
 
         iya.setText(answer[0]);
@@ -72,20 +73,32 @@ public class Test extends AppCompatActivity {
             finishTest.setEnabled(false);
         }
 
+        btnNext = findViewById(R.id.btn_next);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                next();
+            }
+        });
+
         finishTest = findViewById(R.id.btn_finish);
         finishTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ResultTest.class);
                 startActivity(intent);
+                next();
             }
         });
+
 
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> {
             back();
         });
+
     }
+
 
     public void back() {
         iya = findViewById(R.id.rb_iya);
@@ -133,7 +146,7 @@ public class Test extends AppCompatActivity {
         }
     }
 
-    public void next(View view) {
+    public void next() {
         if (iya.isChecked() || tidak.isChecked()) {
             jawaban_user = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
             ambil_jawaban_user = jawaban_user.getText().toString();
@@ -142,17 +155,17 @@ public class Test extends AppCompatActivity {
             if ((no % 2) == 0) {
                 // Genap & Introvert
                 if (ambil_jawaban_user.equalsIgnoreCase(answer[0])) {
-                    pilih_introvert++;
+                    pilih_introvert = pilih_introvert +1;
                 } else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])) {
-                    pilih_extrovert++;
+                    pilih_extrovert = pilih_extrovert +1;
                 }
             }
             else {
                 // Ganjil % Extrovert
                 if (ambil_jawaban_user.equalsIgnoreCase(answer[0])) {
-                    pilih_extrovert++;
+                    pilih_extrovert = pilih_extrovert +1;
                 } else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])) {
-                    pilih_introvert++;
+                    pilih_introvert = pilih_introvert +1;
                 }
             }
 
