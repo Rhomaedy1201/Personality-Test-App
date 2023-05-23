@@ -47,10 +47,9 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     Button login;
-    private String url = "http://192.168.1.8:8000/api/api_user";
-    TextView text;
     List<DataModalUser> allUserList;
     DataModalUser dataModalUser;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +87,9 @@ public class Login extends AppCompatActivity {
             startActivityForResult(intent, 100);
         });
 
+//        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        Toast.makeText(this, currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
@@ -100,9 +102,8 @@ public class Login extends AppCompatActivity {
     private void getApiUser() {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, DataApi.api_get_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 dataModalUser = new DataModalUser();
@@ -117,10 +118,13 @@ public class Login extends AppCompatActivity {
                         if (data.getString("email").equalsIgnoreCase(firebaseUser.getEmail())){
                             Log.e(TAG, "ADA DATANYA");
                             Log.e(TAG, "GAUSAH DITAMBAHKAN");
+                            System.out.println("ADA DATANYA");
                         }else{
                             Log.e(TAG, "KOSONG DATANYA");
                             Log.e(TAG, "HARUS DITAMBAHKAN");
+                            System.out.println("KOSONG DATANYA");
                             postApiUser();
+                            postApiUidResultTest();
                         }
                     }
                 } catch (JSONException e) {
@@ -139,9 +143,9 @@ public class Login extends AppCompatActivity {
     private void postApiUser(){
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
-
+        String user_uid = firebaseUser.getUid();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DataApi.api_post_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, response);
@@ -149,7 +153,7 @@ public class Login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "POS Data Gagal!");
+                Log.e(TAG, "POS Data User Gagal!");
             }
         }){
             @Override
@@ -159,7 +163,44 @@ public class Login extends AppCompatActivity {
                 params.put("email", firebaseUser.getEmail());
                 params.put("password", "Password");
                 params.put("role", "user");
-                params.put("google_id","1010101101010");
+                params.put("google_id", user_uid);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    private void postApiUidResultTest(){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DataApi.api_post_result_test, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG, response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "POS Data Result Test Gagal!");
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("google_id", firebaseUser.getUid());
+                params.put("value_introvert", "");
+                params.put("value_extrovert", "");
+                params.put("personality", "");
+                params.put("date", "");
+                params.put("date_expire", "");
                 return params;
             }
 

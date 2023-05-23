@@ -78,6 +78,8 @@ public class ProfileFragment extends Fragment {
                         Toast.makeText(getContext(), "Logout successful", Toast.LENGTH_SHORT).show();
                         // Finish activity
                         getActivity().finish();
+                    }else{
+                        System.out.println("Salah");
                     }
                 }
             });

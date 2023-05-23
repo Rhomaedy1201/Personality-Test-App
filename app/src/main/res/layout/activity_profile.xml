@@ -27,13 +27,12 @@
             android:layout_height="100dp"
             android:gravity="center"
             android:background="@mipmap/profile_bg">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_img"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:src="@drawable/profile"
-                android:clipToOutline="true"
-                android:background="@drawable/radius_profile"/>
+                android:clipToOutline="true"/>
         </LinearLayout>
         <TextView
             android:id="@+id/name_profile"
@@ -41,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Muhammad Rhomaedi"
             android:textColor="@color/black"
-            android:textSize="17dp"
+            android:textSize="40dp"
             android:textStyle="bold"
             android:layout_marginTop="15dp"/>
         <TextView

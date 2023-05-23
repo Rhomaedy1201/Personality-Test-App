@@ -28,12 +28,19 @@ import java.util.Map;
 public class ResultTest extends AppCompatActivity {
 
     PieChart pieChart;
+    TextView personality1, personality2;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_test);
+
+        personality1 = findViewById(R.id.typePersonality1);
+        personality2 = findViewById(R.id.typePersonality2);
+
+        personality1.setText(Test.hasil_kepribadaian);
+        personality2.setText(Test.hasil_kepribadaian);
 
         pieChart = findViewById(R.id.pieChart_view);
         showPieChart();

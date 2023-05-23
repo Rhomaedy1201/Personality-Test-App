@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ResultTestFragment">
+    <ProgressBar
+        android:id="@+id/progressBar_resultTestFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/Blue"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,15 +30,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipe Kepribadian anda adalah : "
+                android:text="Silahkan Melakukan Test Terlebih dahulu"
                 android:textSize="16dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/personalityType"
                 android:layout_marginTop="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Introvert"
+                android:text="Data Kosong!"
                 android:textSize="20dp"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
@@ -57,35 +63,29 @@
             android:layout_marginTop="25dp"
             android:gravity="center">
             <TextView
+                android:id="@+id/personalityFrag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Introvert"
+                android:text=""
                 android:textSize="18dp"
+                android:capitalize="sentences"
+                android:inputType="textCapCharacters"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
             <TextView
+                android:id="@+id/descPersonalityFrag"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="normal"
                 android:textAlignment="center"
+                android:layout_marginBottom="50dp"
                 android:textSize="14dp"
-                android:text="introvert di lingkungan kerja memiliki
-karakteristik, yakni mereka cenderung tidak
-menyukai konflik. Bahkan jika memungkinkan
-mereka memilih untuk menghindari konflik
-di kantor. Kelebihan dari karyawan introvert
-adalah mereka melakukan pekerjaan secara
-fokus. Mereka menghindari multitasking dan
-memilih menyelesaikan satu pekerjaan
-terlebih dahulu. Selain itu, introvert lebih
-menyukai keheningan atau suasana
-kantor yang tidak berisik untuk meningkatkan
-fokusnya dalam bekerja." />
+                android:text=""/>
         </LinearLayout>
     </LinearLayout>
     </ScrollView>
 
 
-</LinearLayout>
+</RelativeLayout>

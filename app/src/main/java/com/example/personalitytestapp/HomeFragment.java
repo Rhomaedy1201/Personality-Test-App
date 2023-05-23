@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getContext(), Test.class);
                 startActivity(intent);
                 getActivity().finish();
+                getActivity().finish();
             }
         });
 

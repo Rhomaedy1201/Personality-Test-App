@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +18,21 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Test extends AppCompatActivity {
 
@@ -30,6 +45,7 @@ public class Test extends AppCompatActivity {
     public static int pilih_introvert, pilih_extrovert;
     RadioButton jawaban_user;
     String ambil_jawaban_user;
+    public static String hasil_kepribadaian;
 
     //    question title
     String[] question_title = QuestionTest.question_test;
@@ -38,6 +54,8 @@ public class Test extends AppCompatActivity {
             "Iya",
             "Tidak",
     };
+    private FirebaseAuth mAuth;
+    private static final String TAG = "GoogleActivity";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -88,6 +106,11 @@ public class Test extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ResultTest.class);
                 startActivity(intent);
                 next();
+                updateResultTest(hasil_kepribadaian);
+                finish();
+                finish();
+                finish();
+                System.out.println("Kepribadian anda adalah : " + hasil_kepribadaian);
             }
         });
 
@@ -155,9 +178,9 @@ public class Test extends AppCompatActivity {
             if ((no % 2) == 0) {
                 // Genap & Introvert
                 if (ambil_jawaban_user.equalsIgnoreCase(answer[0])) {
-                    pilih_introvert = pilih_introvert +1;
+                    pilih_introvert = pilih_introvert + 1;
                 } else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])) {
-                    pilih_extrovert = pilih_extrovert +1;
+                    pilih_extrovert = pilih_extrovert + 1;
                 }
             }
             else {
@@ -170,7 +193,19 @@ public class Test extends AppCompatActivity {
             }
 
             rg.check(0);
-            no++;
+            if (no >= 39){
+            }else{
+                no++;
+            }
+
+            System.out.println(no);
+            if (Integer.valueOf(pilih_introvert) > Integer.valueOf(pilih_extrovert)){
+                hasil_kepribadaian = "introvert";
+            }else {
+                hasil_kepribadaian = "extrovert";
+
+            }
+            System.out.println("KEP : " + hasil_kepribadaian);
 
             // mengecek nilai jawaban dari soal
             System.out.println("Introvert = " + pilih_introvert);
@@ -211,6 +246,52 @@ public class Test extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Kamu jawab dulu", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void updateResultTest(String kepribadianAnda){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        String user_uid = firebaseUser.getUid();
+
+        Date date = new Date();
+        CharSequence dt_now  = DateFormat.format("dd", date.getTime());
+        CharSequence dt_now2  = DateFormat.format("yyyy-MM-", date.getTime());
+        String tanggal  = String.valueOf(DateFormat.format("yyyy-MM-dd", date.getTime()));
+        int tgl = Integer.parseInt(String.valueOf(dt_now));
+        int exp = tgl + 5;
+        String tglExpired = String.valueOf(dt_now2)+String.valueOf(exp);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, DataApi.api_put_result_test + user_uid, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG, response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Update Data Result Test Gagal!");
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("value_introvert", String.valueOf(pilih_introvert));
+                params.put("value_extrovert", String.valueOf(pilih_extrovert));
+                params.put("personality", kepribadianAnda);
+                params.put("date", String.valueOf(tanggal));
+                params.put("date_expired", tglExpired);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 
 }

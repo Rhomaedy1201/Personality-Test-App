@@ -53,12 +53,11 @@
                 android:gravity="center"
                 android:onClick="display_profile"
                 android:background="@drawable/bg_icon_login">
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:src="@drawable/profile"
-                    android:background="@drawable/radius_profile"
                     android:clipToOutline="true"/>
             </LinearLayout>
         </LinearLayout>
