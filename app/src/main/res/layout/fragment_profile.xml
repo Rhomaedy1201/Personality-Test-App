@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,7 @@
     android:layout_marginVertical="35dp"
     android:layout_marginHorizontal="30dp"
     tools:context=".ProfileFragment">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
         <LinearLayout
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -39,7 +41,7 @@
             android:id="@+id/name_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Muhammad Rhomaedi"
+            android:text="Name"
             android:textColor="@color/black"
             android:textSize="17dp"
             android:textStyle="bold"
@@ -48,17 +50,26 @@
             android:id="@+id/email_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="rhomaedy@gmail.com"
+            android:text="Email"
             android:textColor="#747474"
             android:textSize="17dp"
             android:layout_marginTop="5dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_marginTop="20dp"
+            app:cornerRadius="50dp"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_marginTop="20dp"/>
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/Blue"/>
+
+</RelativeLayout>

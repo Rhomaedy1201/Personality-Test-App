@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
-public class SplashScreen extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+public class SplashScreen extends AppCompatActivity {
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,11 +20,20 @@ public class SplashScreen extends AppCompatActivity {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(decorView.SYSTEM_UI_FLAG_FULLSCREEN);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreen.this, Login.class));
-                finish();
+                System.out.println(mAuth.getUid());
+                if (firebaseUser != null) {
+                    startActivity(new Intent(SplashScreen.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    finish();
+                }else {
+                    startActivity(new Intent(SplashScreen.this, Login.class));
+                    finish();
+                }
             }
         }, 3000);
     }

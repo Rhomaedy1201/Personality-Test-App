@@ -46,11 +46,6 @@ public class ResultTest extends AppCompatActivity {
         showPieChart();
     }
 
-    private void tabBackHome() {
-        Intent intent = new Intent(getApplicationContext(), Home.class);
-        startActivity(intent);
-    }
-
     private void showPieChart(){
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();

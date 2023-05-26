@@ -56,23 +56,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        getApiUser();
-
-//        SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
-//        String idUser = prefs.getString("idUser", null);
-//        String name = prefs.getString("name", null);
-//        String email = prefs.getString("email", null);
-//        String picture = prefs.getString("picture", null);
-//
-//        if (name != null){
-//            Intent intent = new Intent(Login.this, Home.class);
-//            intent.putExtra("idUser",idUser);
-//            intent.putExtra("name", name);
-//            intent.putExtra("email", email);
-//            intent.putExtra("picture", picture);
-//            startActivity(intent);
-//        }
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("56816710394-pc0gv3u0at5vdkn762bh7umefj0te2jm.apps.googleusercontent.com")
                 .requestEmail()
@@ -87,14 +70,12 @@ public class Login extends AppCompatActivity {
             startActivityForResult(intent, 100);
         });
 
-//        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//        Toast.makeText(this, currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
-
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
             // When user already sign in redirect to profile activity
             startActivity(new Intent(Login.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
         }
 
     }
@@ -103,7 +84,7 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, DataApi.api_get_user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, DataApi.api_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 dataModalUser = new DataModalUser();
@@ -145,7 +126,7 @@ public class Login extends AppCompatActivity {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         String user_uid = firebaseUser.getUid();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, DataApi.api_post_user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DataApi.api_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, response);
@@ -181,7 +162,7 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, DataApi.api_post_result_test, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DataApi.api_result_test, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, response);
@@ -242,9 +223,9 @@ public class Login extends AppCompatActivity {
                                 // Check condition
                                 if (task.isSuccessful()) {
                                     // When task is successful redirect to profile activity display Toast
-                                    startActivity(new Intent(Login.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                     getApiUser();
-                                    displayToast("Firebase authentication successful");
+                                    startActivity(new Intent(Login.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                    finish();
                                 } else {
                                     // When task is unsuccessful display Toast
                                     displayToast("Authentication Failed :" + task.getException().getMessage());

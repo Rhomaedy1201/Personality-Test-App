@@ -2,17 +2,22 @@ package com.example.personalitytestapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -56,6 +61,7 @@ public class Test extends AppCompatActivity {
     };
     private FirebaseAuth mAuth;
     private static final String TAG = "GoogleActivity";
+    ImageView close;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -74,11 +80,15 @@ public class Test extends AppCompatActivity {
         iya = findViewById(R.id.rb_iya);
         tidak = findViewById(R.id.rb_tidak);
 
+        close = findViewById(R.id.closeTest);
 
         question.setText(question_title[0]);
 
         iya.setText(answer[0]);
         tidak.setText(answer[1]);
+
+        pilih_introvert =0;
+        pilih_extrovert =0;
 
         rg.check(0);
 
@@ -118,6 +128,14 @@ public class Test extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> {
             back();
+        });
+
+        //close Test
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
         });
 
     }
@@ -262,7 +280,7 @@ public class Test extends AppCompatActivity {
         String tglExpired = String.valueOf(dt_now2)+String.valueOf(exp);
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.PUT, DataApi.api_put_result_test + user_uid, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, DataApi.api_result_test + user_uid, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, response);
@@ -292,6 +310,42 @@ public class Test extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
+    }
+
+    private void showDialog(){
+        ConstraintLayout constraintLayout = findViewById(R.id.successConstrantLayout);
+        View view1 = LayoutInflater.from(Test.this).inflate(R.layout.dialog_custom, constraintLayout);
+        Button btnKeluar = view1.findViewById(R.id.keluar);
+        Button btnBatal = view1.findViewById(R.id.batal);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Test.this);
+        builder.setView(view1);
+        final AlertDialog alertDialog = builder.create();
+
+        btnKeluar.findViewById(R.id.keluar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                Toast.makeText(Test.this, "Keluar", Toast.LENGTH_SHORT).show();
+                pilih_introvert = 0;
+                pilih_extrovert = 0;
+                startActivity(new Intent(Test.this, MainActivity.class));
+                System.out.println(pilih_introvert + " == " + pilih_extrovert);
+                finish();
+                finish();
+                finish();
+            }
+        });
+        btnBatal.findViewById(R.id.batal).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        if (alertDialog.getWindow() != null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
     }
 
 }

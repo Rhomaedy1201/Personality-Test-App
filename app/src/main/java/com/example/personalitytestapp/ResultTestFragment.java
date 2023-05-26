@@ -80,7 +80,7 @@ public class ResultTestFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, DataApi.api_get_result_test + firebaseUser.getUid(), null,
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, DataApi.api_result_test + firebaseUser.getUid(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -92,7 +92,8 @@ public class ResultTestFragment extends Fragment {
                                 System.out.println("data kosong");
                             }else{
                                 progressBar.setVisibility(View.GONE);
-                                // Delete data result text
+
+                                //get date
                                 date = new Date();
                                 CharSequence dt_now  = DateFormat.format("dd", date.getTime());
                                 int tanggal = Integer.valueOf((String) dt_now);
@@ -101,12 +102,14 @@ public class ResultTestFragment extends Fragment {
                                 int dt = Integer.parseInt(dFirst+dLast);
                                 System.out.println(dt);
 
+                                // Delete data result text
                                 if (tanggal >= dt){
                                     System.out.println("Delete Hasil Test");
                                     DeleteResultTest();
                                 }else {
                                     System.out.println("Hasil Test TETAP");
                                 }
+
                                 // Pie Chart
                                 personality.setText(employee.getString("personality"));
                                 personality2.setText(employee.getString("personality"));
@@ -169,7 +172,7 @@ public class ResultTestFragment extends Fragment {
     private void DeleteResultTest(){
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.DELETE, DataApi.api_delete_result_test + firebaseUser.getUid(), null,
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.DELETE, DataApi.api_result_test + firebaseUser.getUid(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
