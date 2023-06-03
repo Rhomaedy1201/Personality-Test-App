@@ -20,7 +20,7 @@
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:background="@mipmap/bg_header_home"
+                android:background="@mipmap/bg_home"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="match_parent"

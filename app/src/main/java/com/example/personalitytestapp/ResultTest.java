@@ -7,28 +7,25 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ProgressBar;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.google.android.gms.common.util.ArrayUtils;
+import com.google.android.material.button.MaterialButton;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ResultTest extends AppCompatActivity {
 
     PieChart pieChart;
-    TextView personality1, personality2;
+    TextView personality1, personality2, desc;
+    MaterialButton toHome;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -36,28 +33,45 @@ public class ResultTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_test);
 
-        personality1 = findViewById(R.id.typePersonality1);
-        personality2 = findViewById(R.id.typePersonality2);
+        personality1 = findViewById(R.id.personalityActivity);
+        personality2 = findViewById(R.id.personalityActivity2);
+        desc = findViewById(R.id.descPersonality);
+        toHome = findViewById(R.id.btn_back_home);
 
         personality1.setText(Test.hasil_kepribadaian);
         personality2.setText(Test.hasil_kepribadaian);
 
         pieChart = findViewById(R.id.pieChart_view);
         showPieChart();
+
+        toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ResultTest.this, MainActivity.class));
+                finish();
+            }
+        });
     }
+
 
     private void showPieChart(){
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
         String label = "";
 
-        int introvert = (Test.pilih_introvert * 100) / 40;
-        int extrovert = (Test.pilih_extrovert * 100) / 40;
+        float introvert = (Float.valueOf(Test.pilih_introvert) * 100) / 40;
+        float extrovert = (Float.valueOf(Test.pilih_extrovert) * 100) / 40;
 
-
+        if (Test.hasil_kepribadaian.equalsIgnoreCase("introvert")){
+            desc.setText(PersonalityDescription.introvert);
+        }else if(Test.hasil_kepribadaian.equalsIgnoreCase("extrovert")) {
+            desc.setText(PersonalityDescription.extrovert);
+        }else{
+            desc.setText(PersonalityDescription.ambivert);
+        }
 
         //initializing data
-        Map<String, Integer> typeAmountMap = new HashMap<>();
+        Map<String, Float> typeAmountMap = new HashMap<>();
         typeAmountMap.put("Introvert", introvert);
         typeAmountMap.put("Extrovert", extrovert);
 
@@ -80,7 +94,7 @@ public class ResultTest extends AppCompatActivity {
         //grouping the data set from entry to chart
         PieData pieData = new PieData(pieDataSet);
         //showing the value of the entries, default true if not set
-        pieData.setValueFormatter(new MyValueFormatter(new DecimalFormat("###,###,###"), pieChart));
+        pieData.setValueFormatter(new MyValueFormatter(new DecimalFormat("###,###,##0.0"), pieChart));
         pieData.setDrawValues(true);
 
         pieChart.setData(pieData);

@@ -113,14 +113,25 @@ public class Test extends AppCompatActivity {
         finishTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ResultTest.class);
-                startActivity(intent);
-                next();
-                updateResultTest(hasil_kepribadaian);
-                finish();
-                finish();
-                finish();
-                System.out.println("Kepribadian anda adalah : " + hasil_kepribadaian);
+                if (iya.isChecked() || tidak.isChecked()) {
+                    if(pilih_introvert == 20 && pilih_extrovert == 20){
+                        Intent intent = new Intent(getApplicationContext(), ResultTest.class);
+                        startActivity(intent);
+                        next();
+                        updateResultTest(hasil_kepribadaian);
+                        finish();
+                        System.out.println("Kepribadian anda adalah : " + hasil_kepribadaian);
+                    }else {
+                        Intent intent = new Intent(getApplicationContext(), ResultTest.class);
+                        startActivity(intent);
+                        next();
+                        updateResultTest(hasil_kepribadaian);
+                        finish();
+                        System.out.println("Kepribadian anda adalah : " + hasil_kepribadaian);
+                    }
+                }else {
+                    Toast.makeText(Test.this, "Anda pilih salah satu jawaban!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -147,6 +158,28 @@ public class Test extends AppCompatActivity {
         no--;
         System.out.println("" + no);
         System.out.println("" + ambil_jawaban_user);
+
+
+        // mengecek jawaban yang dipilih dan menambah nilai 1 pada salah satu pilihan
+        if ((no % 2) == 0) {
+            // Genap & Introvert
+            if (ambil_jawaban_user.equalsIgnoreCase(answer[0])) {
+                pilih_introvert = pilih_introvert - 1;
+            } else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])) {
+                pilih_extrovert = pilih_extrovert - 1;
+            }
+        }
+        else {
+            // Ganjil % Extrovert
+            if (ambil_jawaban_user.equalsIgnoreCase(answer[0])) {
+                pilih_extrovert = pilih_extrovert - 1;
+            } else if (ambil_jawaban_user.equalsIgnoreCase(answer[1])) {
+                pilih_introvert = pilih_introvert - 1;
+            }
+        }
+
+        System.out.println("intovert : " + pilih_introvert);
+        System.out.println("extovert : " + pilih_extrovert);
         if (ambil_jawaban_user == "Iya") {
 //            iya.setChecked(true);
             System.out.println("Iyaaaaaa");
@@ -219,10 +252,12 @@ public class Test extends AppCompatActivity {
             System.out.println(no);
             if (Integer.valueOf(pilih_introvert) > Integer.valueOf(pilih_extrovert)){
                 hasil_kepribadaian = "introvert";
-            }else {
+            }else if(Integer.valueOf(pilih_introvert) < Integer.valueOf(pilih_extrovert)) {
                 hasil_kepribadaian = "extrovert";
-
+            }else {
+                hasil_kepribadaian = "ambivert";
             }
+
             System.out.println("KEP : " + hasil_kepribadaian);
 
             // mengecek nilai jawaban dari soal
@@ -262,7 +297,7 @@ public class Test extends AppCompatActivity {
                 finishTest.setEnabled(true);
             }
         } else {
-            Toast.makeText(this, "Kamu jawab dulu", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Anda pilih salah satu jawaban!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -276,8 +311,11 @@ public class Test extends AppCompatActivity {
         CharSequence dt_now2  = DateFormat.format("yyyy-MM-", date.getTime());
         String tanggal  = String.valueOf(DateFormat.format("yyyy-MM-dd", date.getTime()));
         int tgl = Integer.parseInt(String.valueOf(dt_now));
-        int exp = tgl + 5;
+        int exp = tgl + 1;
         String tglExpired = String.valueOf(dt_now2)+String.valueOf(exp);
+
+        System.out.println("Tanggal : " + tanggal);
+        System.out.println("Tanggal Exp : " + tglExpired);
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, DataApi.api_result_test + user_uid, new Response.Listener<String>() {
@@ -297,7 +335,7 @@ public class Test extends AppCompatActivity {
                 params.put("value_introvert", String.valueOf(pilih_introvert));
                 params.put("value_extrovert", String.valueOf(pilih_extrovert));
                 params.put("personality", kepribadianAnda);
-                params.put("date", String.valueOf(tanggal));
+                params.put("date", tanggal);
                 params.put("date_expired", tglExpired);
                 return params;
             }

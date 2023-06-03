@@ -41,7 +41,7 @@ public class ResultTestFragment extends Fragment {
     PieChart pieChart;
     RequestQueue requestQueue;
     private FirebaseAuth mAuth;
-    TextView personality, personality2, descPersonality;
+    TextView personality, personality2, descPersonality, tiitle;
     ProgressBar progressBar;
     Date date;
     String tanggall;
@@ -55,6 +55,7 @@ public class ResultTestFragment extends Fragment {
         personality = view.findViewById(R.id.personalityType);
         personality2 = view.findViewById(R.id.personalityFrag);
         descPersonality = view.findViewById(R.id.descPersonalityFrag);
+        tiitle = view.findViewById(R.id.titleResult);
 
         progressBar = view.findViewById(R.id.progressBar_resultTestFrag);
 
@@ -90,9 +91,9 @@ public class ResultTestFragment extends Fragment {
                             JSONObject employee = response.getJSONObject("data");
                             if (employee.getString("google_id").equalsIgnoreCase("kosong") || employee.getString("date").equalsIgnoreCase("null")){
                                 System.out.println("data kosong");
-                            }else{
                                 progressBar.setVisibility(View.GONE);
-
+                            }else{
+                                tiitle.setText("Kepribadian anda adalah :");
                                 //get date
                                 date = new Date();
                                 CharSequence dt_now  = DateFormat.format("dd", date.getTime());
@@ -116,14 +117,18 @@ public class ResultTestFragment extends Fragment {
 
                                 if (employee.getString("personality").equalsIgnoreCase("introvert")){
                                     descPersonality.setText(PersonalityDescription.introvert);
-                                }else {
+                                }else if(employee.getString("personality").equalsIgnoreCase("extrovert")) {
                                     descPersonality.setText(PersonalityDescription.extrovert);
+                                }else{
+                                    descPersonality.setText(PersonalityDescription.ambivert);
                                 }
-                                int introvert = (Integer.valueOf(employee.getString("value_introvert")) * 100) / 40;
-                                int extrovert = (Integer.valueOf(employee.getString("value_extrovert")) * 100) / 40;
 
+                                float introvert = (Float.valueOf(employee.getString("value_introvert")) * 100) / 40;
+                                float extrovert = (Float.valueOf(employee.getString("value_extrovert")) * 100) / 40;
+
+                                System.out.println("intro : " +introvert+ "\nextro : " + extrovert);
                                 //initializing data
-                                Map<String, Integer> typeAmountMap = new HashMap<>();
+                                Map<String, Float> typeAmountMap = new HashMap<>();
                                 typeAmountMap.put("Introvert", introvert);
                                 typeAmountMap.put("Extrovert", extrovert);
 
@@ -146,11 +151,12 @@ public class ResultTestFragment extends Fragment {
                                 //grouping the data set from entry to chart
                                 PieData pieData = new PieData(pieDataSet);
                                 //showing the value of the entries, default true if not set
-                                pieData.setValueFormatter(new MyValueFormatter(new DecimalFormat("###,###,###"), pieChart));
+                                pieData.setValueFormatter(new MyValueFormatter(new DecimalFormat("###,###,##0.0"), pieChart));
                                 pieData.setDrawValues(true);
 
                                 pieChart.setData(pieData);
                                 pieChart.invalidate();
+                                progressBar.setVisibility(View.GONE);
                             }
 
                         } catch (Exception e) {
